@@ -1,37 +1,34 @@
-
 import { Schema, model, models } from "mongoose";
 
-const UserSchema = new Schema(
+const ExpenseSchema = new Schema(
   {
     //column creation in the table
-    fname: {
+    eName: {
       type: String,
-      required: [true, "Please Provide a first name"],
-      maxlength: 20,
-    },
-
-    lname: {
-      type: String,
-      required: [true, "Please Provide a last name"],
+      required: [true, "Please Provide expense name"],
       maxlength: 30,
     },
 
-    email: {
-      type: Email,
-      required: [true, "Please Provide an email address"],
-      unique: true,
-    },
-
-    username: {
+    eType: {
       type: String,
-      required: [true, "Please Provide a username"],
+      required: [true, "Please Provide expense type"],
       maxlength: 30,
-      unique: true,
     },
 
-    password: {
-      type: Password,
-      required: [true, "Please Provide a password"],
+    ePrice: {
+      type: Number,
+      required: [true, "Please Provide expense price"],
+    },
+
+    createDate: {
+      type: date,
+      required: [true, "Date created"],
+      timeCreated: Date,
+    },
+
+    createUser: {
+      type: String,
+      required: [true, "Created by"],
       maxlength: 40,
     },
   },
@@ -40,6 +37,6 @@ const UserSchema = new Schema(
   }
 );
 
-const Users = models.Users || model("users", UserSchema);
+const Expenses = models.Expenses || model("Expenses", ExpenseSchema);
 
-export default Users;
+export default Expenses;
