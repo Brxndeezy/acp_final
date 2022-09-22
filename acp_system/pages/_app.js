@@ -1,12 +1,9 @@
-import '../styles/globals.css'
-import '../styles/form.css'
-import Register from './account/register'
-import Login from './account/login'
+import "../styles/globals.css";
+import "../styles/form.css";
 
-function MyApp({ Component, pageProps }) {
-  return(
-    <Register />
-  )
-  }
-
-export default MyApp;
+export default function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
+  return <Component {...pageProps} />;
+}

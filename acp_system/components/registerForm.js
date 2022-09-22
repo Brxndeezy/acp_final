@@ -1,15 +1,58 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
-function Register() {
+function postData() {
+  const [data, setData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    uname: "",
+    password: "",
+  });
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (Object.keys(formData).length == 0) {
+    return window.alert("Don't have any Form Data");
+  }
+};
+
+/* const postData = async () => {
+   The POST method adds a new entry in the mongodb database. 
+  try {
+    const res = await fetch("/api/addUser", {
+      method: "POST",
+      headers: {
+        Accept: contentType,
+        "Content-Type": contentType,
+      },
+      body: JSON.stringify(),
+    }); 
+
+    // Throw error with status code if fetch api failed
+    if (!res.ok) {
+      throw new Error(res.status);
+    }
+
+    router.push("/");
+  } catch (error) {
+    setMessage("Failed to add User");
+  }
+};
+*/
+
+const RegisterForm = () => {
   return (
     <div class="bg-gradient-to-r from-sky-500 to-blue-500">
       <form
         class="flex justify-center items-center max-w-md mx-auto h-screen overflow-hidden md:max-w-2xl"
         action="submit"
         method="POST"
+        onSubmit={postData}
       >
-        <div class="rounded-xl shadow-xl border h-14rem w-full p-10 overflow-hidden bg-white sm:px-4">
+        <div class="rounded-xl shadow-xl border h-14rem w-full p-10 overflow-hidden bg-white sm:px-12">
           <div class="">
             <h1 class="md:text-4xl font-bold text-center pb-10 sm:text-3xl">
               Acute Catering & Projects
@@ -20,6 +63,7 @@ function Register() {
               First Name
             </label>
             <input
+              onChange={setData}
               class="w-full shadow appearance-none border rounded p-2"
               type="text"
               id="fname"
@@ -32,6 +76,7 @@ function Register() {
               Last Name
             </label>
             <input
+              onChange={setData}
               class="w-full shadow appearance-none border rounded p-2"
               type="text"
               id="lname"
@@ -44,9 +89,9 @@ function Register() {
               Email
             </label>
             <input
+              onChange={setData}
               class="w-full shadow appearance-none border rounded p-2"
               type="email"
-              id="email"
               name="email"
               placeholder="Enter your Email"
             />
@@ -56,6 +101,7 @@ function Register() {
               Username
             </label>
             <input
+              onChange={setData}
               class="w-full shadow appearance-none border rounded p-2"
               type="text"
               id="uname"
@@ -63,49 +109,43 @@ function Register() {
               placeholder="Enter your Username"
             />
           </div>
-          <div class="mb-10">
+          <div class="mb-8">
             <label class="block font-bold text-xl mb-2" for="pwd">
               Password
             </label>
             <input
+              onChange={setData}
               class="w-full shadow appearance-none border rounded p-2"
               type="password"
-              id="pwd"
-              name="pwd"
+              id="password"
+              name="password"
               placeholder="Enter your Password"
             />
           </div>
           <div class="">
-            <input
-              class="bg-blue-600 hover:bg-blue-900 text-white py-2 px-6 font-bold rounded"
-              type="button"
-              value="Sign Up"
-              onClick={clickHandler}
-            />
-            <div class="float-right mt-2 sm:text-base mr-0 md:text-lg font-bold">
-              Already have an account?{" "}
-              <Link href="/account/login">
+            <div class="flex justify-center mt-2 sm:text-base mr-0 md:text-lg font-bold pb-8">
+              Already have an account? &nbsp;
+              <Link href="/login">
                 <span class="underline text-blue-600 hover:text-blue-900 cursor-pointer">
                   Login Here
                 </span>
               </Link>
+            </div>
+            <div class="flex justify-center">
+              <button
+                onClick={handleSubmit}
+                class="bg-blue-600 hover:bg-blue-900 text-white py-2 px-6 font-bold rounded-xl"
+                type="submit"
+                value="Sign Up"
+              >
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
       </form>
     </div>
   );
-}
+};
 
-async function clickHandler(enteredData) {const response = await
-fetch("/api/form",{
-  method: "POST",
-  body: JSON.stringify(enteredData),
-});
-
-  const data = await response.json();
-
-  console.log(data);
-}
-
-export default Register;
+export default RegisterForm;
