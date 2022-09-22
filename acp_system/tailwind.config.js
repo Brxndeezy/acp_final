@@ -5,7 +5,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: theme=> ({
+        'pattern': "url('/public/moroccan-flower-dark.png')",
+      }),
+    
+    screens:{
+      'sm' : '570px',
+      // => @media (min-width: 570px) { ... }
+
+    }
+    },
   },
   plugins: [],
 };
